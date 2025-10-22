@@ -44,9 +44,8 @@ html {
 }
 
 #top {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1000;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -112,10 +111,13 @@ h2 {
   gap: 3rem; /* espacio entre imagen y texto */
 }
 
-.web_cont iframe {
+.web_cont img {
   width: 50%; /* ocupa la mitad del ancho */
   height: 20em; /* ajusta según necesites */
   border: none;
+  object-fit: fill; /* Ajusta la imagen sin deformar */
+  overflow: hidden; /* Oculta cualquier contenido que sobresalga */
+  display: block;
 }
 
 .web_cont p {
@@ -142,58 +144,29 @@ h2 {
   width: 100%;
   overflow: hidden;
   position: relative;
-  margin: 2rem 0;
 }
 
-.carousel-images {
+.carousel-track {
   display: flex;
-  width: calc(100% * 5); /* número de iframes */
-  animation: slide 25s infinite linear;
+  width: calc(200%); /* doble porque se duplican las imágenes */
+  animation: scroll 15s linear infinite;
 }
 
-.carousel iframe {
-  flex: 0 0 100%; /* cada imagen ocupa todo el ancho */
-  width: 100%;
-  height: 500px;
-  border: none;
-  object-fit: cover;
+.carousel img {
+  width: 50em; /* cada imagen ocupa todo el ancho de la pantalla */
+  height: 30em; /* altura horizontal */
+  object-fit: cover; /* recorta sin deformar */
+  flex-shrink: 0;
+  border-radius: 0; /* sin bordes redondeados */
 }
 
-/* Animación: mueve el carrusel automáticamente */
-@keyframes slide {
+/* Animación para desplazamiento continuo */
+@keyframes scroll {
   0% {
     transform: translateX(0);
   }
-  20% {
-    transform: translateX(0);
-  }
-
-  25% {
-    transform: translateX(-100%);
-  }
-  40% {
-    transform: translateX(-100%);
-  }
-
-  45% {
-    transform: translateX(-200%);
-  }
-  60% {
-    transform: translateX(-200%);
-  }
-
-  65% {
-    transform: translateX(-300%);
-  }
-  80% {
-    transform: translateX(-300%);
-  }
-
-  85% {
-    transform: translateX(-400%);
-  }
   100% {
-    transform: translateX(-400%);
+    transform: translateX(-50%);
   }
 }
 
@@ -228,6 +201,38 @@ h2 {
   color: var(--color-corporativo-1);
 }
 
+#web3_cont {
+  display: flex;
+  flex-direction: row; /* tarjetas en vertical */
+  gap: 2rem; /* espacio entre tarjetas */
+  margin: 0 auto;
+}
+
+.web3_card {
+  background-color: #000; /* caja negra */
+  border-radius: 15px;
+  overflow: hidden; /* bordes redondeados cortan contenido sobrante */
+  display: flex;
+  flex-direction: column;
+  height: 40rem;
+  width: 50em;
+}
+
+.web3_card img {
+  width: 100%;
+  height: 50%; /* la mitad de la tarjeta para la imagen */
+  object-fit: cover;
+}
+
+.web3_card p {
+  color: #fff; /* texto blanco */
+  padding: 2rem;
+  font-family: "Michroma", sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: justify;
+}
+
 #web4 a {
   text-decoration: none;
   color: inherit;
@@ -236,6 +241,47 @@ h2 {
 #web4 a:hover {
   transition: 0.43s;
   color: var(--color-corporativo-1);
+}
+
+.info {
+  font-family: "Michroma", sans-serif;
+  line-height: 1.7;
+  display: flex;
+  flex-direction: row;
+  gap: 3em;
+}
+.parrafo1,
+.parrafo2 {
+  font-family: "Michroma", sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: justify;
+  margin-bottom: 5em;
+  width: 50%;
+}
+/* contenedor de la galería */
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 🔹 3 columnas */
+  gap: 1.2rem;
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+.gallery img {
+  width: 100%;
+  height: 250px; /* 🔹 todas igual de altas */
+  object-fit: cover; /* recorta sin deformar */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px var(--color-corporativo-1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
 }
 
 .footer {
@@ -304,14 +350,242 @@ h2 {
   font-size: 0.9rem;
   color: #9ca3af;
 }
-/* Responsive: en pantallas pequeñas, que se apilen */
-@media (max-width: 800px) {
+
+/* RESPONSIVE DESIGN */
+
+/* Tablets (hasta 1024px) */
+@media (max-width: 1024px) {
+  /* Navegación */
+  #top {
+    flex-wrap: wrap;
+    padding: 1rem;
+  }
+
+  .menu {
+    gap: 4vw;
+  }
+
+  .menu a {
+    font-size: 1em;
+  }
+
+  #inicio {
+    height: 30em;
+  }
+
+  h1 {
+    font-size: 3em;
+  }
+
+  /* Sección web 1 */
+  .web_cont {
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+  }
+
+  .web_cont img {
+    width: 90%;
+    height: 25em;
+  }
+
+  .web_cont p {
+    font-size: 1em;
+    width: 90%;
+  }
+
+  /* Sección web 2 */
   #web2_cont {
     flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    align-items: center;
   }
 
   #text1,
-  #texto2 {
+  #text2 {
+    width: 90%;
+  }
+
+  #web2_cont p {
     width: 100%;
+    font-size: 1em;
+  }
+
+  /* Carrusel */
+  .carousel img {
+    height: 35vh;
+  }
+
+  /* Web 3 cards */
+  #web3_cont {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .web3_card {
+    width: 90%;
+    height: auto;
+  }
+
+  .web3_card img {
+    height: 500px;
+  }
+
+  .web3_card p {
+    font-size: 1em;
+  }
+  /* Web 4 */
+  .info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .parrafo1,
+  .parrafo2 {
+    width: 90%;
+    font-size: 1em;
+  }
+
+  /* Galería */
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+/*  Móviles (hasta 768px) */
+@media (max-width: 768px) {
+  /* Header */
+  #top {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .menu {
+    gap: 2rem;
+  }
+
+  .menu a {
+    font-size: 0.6em;
+  }
+
+  /* Inicio */
+  #inicio {
+    padding: 3rem 1rem;
+    height: 18em;
+  }
+
+  #inicio h1 {
+    font-size: 3rem;
+  }
+
+  #inicio p {
+    font-size: 0.5rem;
+    max-width: 90%;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  /* Web 1 */
+  .web_cont img {
+    width: 18em;
+    height: 8em;
+  }
+
+  .web_cont p {
+    width: 100%;
+    font-size: 0.5rem;
+  }
+
+  /* Web 2 */
+  #web2_cont {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  #web2_cont p {
+    font-size: 0.5rem;
+    width: 100%;
+  }
+
+  #web2_cont #text2,
+  #text1 {
+    width: 100%;
+  }
+
+  .carousel img {
+    height: 10em;
+    width: 20em;
+  }
+
+  /* Web 3 */
+  .web3_card {
+    width: 100%;
+    height: auto;
+  }
+
+  .web3_card img {
+    height: 200px;
+  }
+
+  .web3_card p {
+    font-size: 0.5rem;
+    padding: 1rem;
+  }
+
+  /* Web 4 */
+  .parrafo1,
+  .parrafo2 {
+    width: 100%;
+    font-size: 0.5rem;
+  }
+
+  .info {
+    gap: 0;
+  }
+
+  /* Galería */
+  .gallery {
+    grid-template-columns: none;
+    gap: 0.75rem;
+  }
+
+  .gallery img {
+    height: 180px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 2rem 1rem;
+  }
+
+  .footer h3 {
+    font-size: 1.8rem;
+  }
+
+  .footer p {
+    font-size: 0.5rem;
+  }
+}
+
+/* Pantallas grandes (desde 1600px) */
+@media (min-width: 1600px) {
+  html {
+    font-size: 18px;
+  }
+
+  #inicio {
+    min-height: 90vh;
+  }
+
+  .web3_card {
+    width: 30%;
+  }
+
+  .gallery img {
+    height: 300px;
   }
 }
