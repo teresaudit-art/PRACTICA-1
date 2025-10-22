@@ -118,6 +118,11 @@ h2 {
   object-fit: fill; /* Ajusta la imagen sin deformar */
   overflow: hidden; /* Oculta cualquier contenido que sobresalga */
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.web_cont img:hover {
+  transform: scale(1.05);
 }
 
 .web_cont p {
@@ -206,6 +211,7 @@ h2 {
   flex-direction: row; /* tarjetas en vertical */
   gap: 2rem; /* espacio entre tarjetas */
   margin: 0 auto;
+  justify-content: center;
 }
 
 .web3_card {
@@ -216,6 +222,11 @@ h2 {
   flex-direction: column;
   height: 40rem;
   width: 50em;
+  transition: transform 0.3s ease;
+}
+
+.web3_card:hover {
+  transform: scale(1.05);
 }
 
 .web3_card img {
